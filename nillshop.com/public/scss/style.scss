@@ -1,0 +1,27 @@
+.f{
+    display: flex;   
+}
+.j-c-c{
+    justify-content: center;
+}
+.j-c-s-a{
+    justify-content: space-around;
+}
+.j-c-s-b{
+    justify-content: space-between;
+}
+.a-i-c{
+   align-items: center; 
+}
+.a-c-c{
+    align-content: center;
+}
+
+//----m,p
+
+.p-8{
+    padding: 8px;
+}
+.p-b-t-8{
+    padding: 8px auto;
+}
