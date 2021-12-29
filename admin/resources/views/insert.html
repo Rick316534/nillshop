@@ -7,10 +7,10 @@
     <title>Document</title>
 </head>
 <body style="max-width: 1200px;display: flex;justify-content: center;">
-    <form action="cominsert" method="post" style="display: flex;flex-wrap: wrap; width: 150px;">
+    <form action="cominsert" method="post" style="display: flex;flex-wrap: wrap; width: 150px;" enctype="multipart/form-data">
         <label for="img_input">上傳圖片:</label>
         <img src="" id="demo" height="200">
-        <input type="file" id="imginp" accept="image/*">
+        <input type="file" id="imginp" name="file" accept="image/*">
         
         <label for="introduce">請輸入商品介紹</label>
         <input type="text" id="introduce">

@@ -1,8 +1,11 @@
 <?php
     include_once("config.php");
-    if($link){
-        echo "成功";
-    }else{
-        echo "連線錯誤！";
+    if (isset($_FILES["file"]["name"])) {
+        $file = $_FILES["file"];
+        $fileName = "../public/image/01.jpg";
+        move_uploaded_file($file["tmp_name"],$fileName);
+        
+        echo "<img src = '".asset('image/01.jpg')."'>";
+    } else {
+        
     }
-    mysqli_close($link);
