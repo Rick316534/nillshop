@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,16 +13,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('log');
+
+
+Auth::routes();
+
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
+
+use App\Http\Controllers\HomeController;
+use Illuminate\Auth\Access\Response;
+
+Route::get('/test', function(){
+    return App\User::all();
 });
-Route::get('storehouse', function () {
-    return view('storehouse');
-});
-Route::get('insert', function () {
-    return view('insert');
-});
-Route::post('cominsert', function () {
-    return view('comminsert');
-});
+ 
+Route::get('/storehouse/{rout?}', 'StorehouseController@jump')->name('house.jump');
+Route::get('/storehouse', 'StorehouseController@store')->name('house.store');
 
