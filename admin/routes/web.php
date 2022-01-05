@@ -28,5 +28,5 @@ Route::get('/test', function(){
 });
  
 Route::get('/storehouse/{rout?}', 'StorehouseController@jump')->name('house.jump');
-Route::get('/storehouse', 'StorehouseController@store')->name('house.store');
+Route::post('/storehouse', 'StorehouseController@store')->name('house.store');
 
