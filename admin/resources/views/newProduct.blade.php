@@ -8,7 +8,7 @@
 </head>
 <body style="max-width: 1200px;display: flex;justify-content: center;">
     <div>
-        <form action="{{ url('/storehouse') }}" method="post" style="display: flex;flex-wrap: wrap; width: 200px;" enctype="multipart/form-data" required>
+        <form action="{{ route('house.store') }}" method="post" style="display: flex;flex-wrap: wrap; width: 200px;" enctype="multipart/form-data" required>
             {{ csrf_field() }}
              <label for="img_input">上傳圖片:</label>
             <img src="" id="demo" height="200">
@@ -21,7 +21,6 @@
                 <option value="2">食品</option>
                 <option value="3">生活</option>
             </select>
-            
             <label for="introduce" style="margin: 5px auto">請輸入商品介紹(最多50字)</label>
             <textarea name="introduce" id="introduce" cols="20" rows="10" maxlength="50" ></textarea>
             <label for="money" style="margin: 5px auto">請輸入商品價格</label>

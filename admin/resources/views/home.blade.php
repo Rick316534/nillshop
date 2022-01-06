@@ -41,10 +41,10 @@
                 </ul>
             </div>
             <div>
-                <ul style="margin: 50px;text-align: center;border: black 1px solid ">
+                <ul style="margin: 50px;text-align: center;">
                     庫存管理
                     <li id='editProduct' style="padding: 9px; list-style-type:none">
-                        <a href="storehouse">
+                        <a href="{{ route('house.jump',['rout' => 'e']) }}">
                             編輯商品
                         </a>
                         

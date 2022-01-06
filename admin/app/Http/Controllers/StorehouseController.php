@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Symfony\Component\VarDumper\Cloner\Data;
-use App\Product;
+
 use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
+
 use Illuminate\Support\Facades\DB;
-use PHPUnit\Framework\Constraint\Count;
-use SebastianBergmann\Environment\Console;
+
+
+
 
 class StorehouseController extends Controller
 {
@@ -35,7 +36,7 @@ class StorehouseController extends Controller
         switch ($rout["rout"])
         {
             case "e":
-                return view('');
+                return view('editProduct');
                 break;
             case "n":
                 return view('newProduct');
@@ -59,6 +60,17 @@ class StorehouseController extends Controller
         return view('result');
     }
 
+    public function select(Request $request)
+    {
+        try {
+            $query = [['id', '=', $request->id]];
+            $a = DB::table('products')->where($query)->first()->url;
+        } catch (\Exception $e) {
+            return "查無此商品";
+        };
+
+        echo $a;
+    }
 }
   
 function fileSet($file) 
@@ -76,7 +88,7 @@ function insertSet($request, $imgName)
     $introduce = $request->introduce;
     $money = $request->money;
     $listed = '1';
-    $url = 'asset(image/'. $imgName. ')';
+    $url = '\'http://admin.com/image/'. $imgName. '\'';
     $quantity = $request -> Q;
     $insertsql = 'insert into products (project_id, name, introduce, money, listed, url, quantity) values (?, ?, ?, ?, ?, ?, ?)' ;
     $data = [$project_id, $name, $introduce, $money, $listed, $url, $quantity];
@@ -85,5 +97,4 @@ function insertSet($request, $imgName)
     } else {
         return url()->current();
     }
-    
 }
