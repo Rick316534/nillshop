@@ -30,7 +30,7 @@ class StorehouseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function jump (Request $rout)
+    public function jump(Request $rout)
     {
         $rout->input('rout');
         switch ($rout["rout"])
@@ -62,15 +62,43 @@ class StorehouseController extends Controller
 
     public function select(Request $request)
     {
+        $query = [['id', '=', $request->id]];
         try {
-            $query = [['id', '=', $request->id]];
-            $a = DB::table('products')->where($query)->first()->url;
+            $result = DB::table('products')->where($query)->first();
+            $url = $result->url;
+            $name = $result->name;
+            $quantity = $result->quantity;
+            $money = $result->money;
+            $listed = $result->listed;
+            $project_id = $result->project_id;
+            $introduce = $result->introduce;
+            $DB = json_encode(array('url'=>$url, 'name'=>$name, 'quantity'=>$quantity, 'money'=>$money, 'listed'=>$listed, 'project_id'=>$project_id, 'introduce'=>$introduce));
         } catch (\Exception $e) {
             return "查無此商品";
         };
-
-        echo $a;
+        echo $DB;
     }
+
+    public function up(Request $request)
+    {
+        $id = $request->id;
+        $name = $request->name;
+        $quantity = $request->quantity;
+        $money = $request->money;
+        $listed = $request->listed;
+        $project_id = $request->project_id;
+        $introduce = $request->introduce;
+        try {
+            $qurys = [['name'=>$name], ['quantity'=>$quantity], ['money'=>$money], ['listed'=>$listed], ['project_id'=>$project_id], ['introduce'=>$introduce]];
+            foreach ($qurys as $qury) {
+                DB::table('products')->where('id', $id)->update($qury);
+            }
+            return "存檔成功";
+        } catch (\Exception $e) {
+            return "存檔失敗";
+        }
+    }
+
 }
   
 function fileSet($file) 
@@ -81,14 +109,14 @@ function fileSet($file)
     return $imgName;
 }
    
-function insertSet($request, $imgName)
+function insertSet ($request, $imgName)
 {
     $project_id = $request->project;
     $name = $request->name;
     $introduce = $request->introduce;
     $money = $request->money;
     $listed = '1';
-    $url = '\'http://admin.com/image/'. $imgName. '\'';
+    $url = 'http://admin.com/image/'. $imgName;
     $quantity = $request -> Q;
     $insertsql = 'insert into products (project_id, name, introduce, money, listed, url, quantity) values (?, ?, ?, ?, ?, ?, ?)' ;
     $data = [$project_id, $name, $introduce, $money, $listed, $url, $quantity];
