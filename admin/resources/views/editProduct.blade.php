@@ -10,7 +10,7 @@
     <div style="margin: 0 auto;width: 100%">
         <div>
             {{ csrf_field() }}
-            <label for="selectProduct">請輸入要編輯的完整商品ID：</label>
+            <label for="selectProduct">請輸入完整的商品編號：</label>
             <input type="text" id="selectProduct" name="selectProduct">
             <input type="button" id="go" value="搜尋">
             <script src=""></script>
@@ -59,7 +59,6 @@
     xhr.open('post','{{route('house.select')}}');
     xhr.setRequestHeader('X-CSRF-TOKEN', '<?PHP echo csrf_token() ?>');
     xhr.setRequestHeader("Content-type","application/json; charset=utf-8");
-    let data = (document.getElementById("selectProduct").value);
     xhr.send(jsn);
     xhr.onload = function() {
         try {

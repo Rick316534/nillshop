@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
 </head>
 <body>
     <div id="app">
@@ -32,7 +33,11 @@
                         {{ config('app.name', 'Laravel') }}
                     </a>
                 </div>
-
+                <div class="search navbar-header" style="margin-top: 10px ;margin-left: 20px">
+                    <label for="search">搜尋</label>
+                    <input type="text" name="search" id="search">
+                    <input type="button" name="begin" id="begin" value="開始搜尋">
+                </div>
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
@@ -56,12 +61,27 @@
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
+                                            登出
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('member.index') }}">
+                                            會員中心
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            購物車
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="">
+                                            訂單查詢
+                                        </a>
                                     </li>
                                 </ul>
                             </li>

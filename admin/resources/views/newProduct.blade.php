@@ -38,7 +38,7 @@
 <script>
     document.getElementById("imginp").addEventListener('change',function(e){
         let file = e.target.files[0]; 
-        // console.log(e.target.files[0]);
+         console.log(e.target.files[0]);
         var reader = new FileReader();
         reader.readAsDataURL(file); // 读取文件
         // 渲染文件

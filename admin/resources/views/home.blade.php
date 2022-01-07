@@ -1,38 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
-    <title>Home</title>
-</head>
-<body>
-    <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
-            選單<span class="caret"></span>
-        </a>
+@extends('layouts.app')
 
-        <ul class="dropdown-menu">
-            <li>
-                <a href="{{ route('logout') }}"
-                    onclick="event.preventDefault();
-                             document.getElementById('logout-form').submit();">
-                    Logout
-                </a>
-
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    {{ csrf_field() }}
-                </form>
-            </li>
-        </ul>
-    </li>
+@section('content')
     <div>
         <div class="menu" style="display: flex;margin: 0 auto">
             <div>
-                <ul id="user" style="margin: 50px">
+                <ul id="user" style="margin: 50px;text-align: center;">
                     帳號管理
-                    <li style="">檢視帳號</li>
+                    <li id='storeMember' style="padding: 9px; ">
+                        <a href="{{ route('member.store') }}">
+                            帳號管理
+                        </a>
+                        
+                    </li>
                 </ul>
             </div>
             <div>
@@ -43,13 +22,13 @@
             <div>
                 <ul style="margin: 50px;text-align: center;">
                     庫存管理
-                    <li id='editProduct' style="padding: 9px; list-style-type:none">
+                    <li id='editProduct' style="padding: 9px; ">
                         <a href="{{ route('house.jump',['rout' => 'e']) }}">
                             編輯商品
                         </a>
                         
                     </li>
-                    <li id='newProduct' style="padding: 9px; list-style-type:none">
+                    <li id='newProduct' style="padding: 9px; ">
                         <a href="{{ route('house.jump',['rout' => 'n']) }}">
                             新增商品
                         </a>
@@ -69,6 +48,4 @@
     <div class="show">
 
     </div>
-</body>
-
-</html>
+@endsection
