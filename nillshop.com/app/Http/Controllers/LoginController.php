@@ -16,12 +16,16 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         //驗證
-        $id = $request['id'];
-        $password = $request['password'];
+        $this->validate(request(),[
+            'id' => 'required|string|email|max:255|regex:/([\w\-]+\@[\w\-]+\.[\w\-]+$)/',
+            'password' => 'required|string|min:6|regex:/^[A-Za-z0-9]+$/', 
+        ]);
+        //查尋
+        $remember_me = $request['remeber_me'];
         if (Auth::attempt([
             'id' => $request['id'],
             'password' => $request['password'],
-        ])) {
+        ], $remember_me)) {
 
             return view('home');
             
