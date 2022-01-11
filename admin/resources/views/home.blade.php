@@ -7,7 +7,7 @@
                 <ul id="user" style="margin: 50px;text-align: center;">
                     帳號管理
                     <li id='storeMember' style="padding: 9px; ">
-                        <a href="{{ route('member.store') }}">
+                        <a href="{{ route('member.index') }}">
                             帳號管理
                         </a>
                         

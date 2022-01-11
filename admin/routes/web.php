@@ -28,7 +28,11 @@ Route::get('/test', function(){
 });
  
 Route::get('/storehouse/{rout?}', 'StorehouseController@jump')->name('house.jump');
-Route::post('/store', 'StorehouseController@store')->name('house.store');
-Route::post('/up', 'StorehouseController@up')->name('house.up');
+Route::post('/housestore', 'StorehouseController@store')->name('house.store');
+Route::post('/houseup', 'StorehouseController@up')->name('house.up');
 Route::post('/productedit/{name?}', 'StorehouseController@select')->name('house.select');
-Route::get('/memberstore', 'MemberController@store')->name('member.store');
+Route::post('/memberstore', 'MemberController@store')->name('member.store');
+Route::get('/memberindex', 'MemberController@index')->name('member.index');
+Route::post('/memberup', 'MemberController@up')->name('member.up');
+Route::post('/memberdelete', 'MemberController@delete')->name('member.delete');
+Route::post('/memberpsw', 'MemberController@psw')->name('member.psw');

@@ -73,10 +73,10 @@ class StorehouseController extends Controller
             $project_id = $result->project_id;
             $introduce = $result->introduce;
             $DB = json_encode(array('url'=>$url, 'name'=>$name, 'quantity'=>$quantity, 'money'=>$money, 'listed'=>$listed, 'project_id'=>$project_id, 'introduce'=>$introduce));
+            return $DB;
         } catch (\Exception $e) {
             return "查無此商品";
         };
-        echo $DB;
     }
 
     public function up(Request $request)

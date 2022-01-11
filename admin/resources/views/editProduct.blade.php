@@ -53,6 +53,13 @@
     
 </body>
 <script>
+    let demo = document.getElementById('demo');
+    let name = document.getElementById('name');
+    let money = document.getElementById('money');
+    let introduce = document.getElementById('introduce');
+    let q = document.getElementById('Q');
+    let project = document.getElementById('project');
+    let listed = document.getElementById('listed');
     document.getElementById("go").addEventListener("click", function() {
     let jsn = JSON.stringify({"id": document.getElementById("selectProduct").value});
     let xhr = new XMLHttpRequest();
@@ -63,36 +70,30 @@
     xhr.onload = function() {
         try {
             let result = JSON.parse(this.responseText);
-            document.getElementById('demo').src = result["url"];
-            document.getElementById('name').value = result["name"];
-            document.getElementById('money').value = result["money"];
-            document.getElementById('introduce').value = result["introduce"];
-            document.getElementById('Q').value = result["quantity"];
-            document.getElementById('project').value = result["project_id"];
-            document.getElementById('listed').value = result["listed"];
+            demo.src = result["url"];
+            name.value = result["name"];
+            money.value= result["money"];
+            introduce.value = result["introduce"];
+            Q.value= result["quantity"];
+            project.value = result["project_id"];
+            listed.value = result["listed"];
         } catch (e) {
             window.alert(this.responseText);
-            document.getElementById('demo').src = "";
-            document.getElementById('name').value = "";
-            document.getElementById('money').value = "";
-            document.getElementById('introduce').value = "";
-            document.getElementById('Q').value = "";
-            document.getElementById('project').value = "";
-            document.getElementById('listed').value = "";
-            document.getElementById('selectProduct').value = "";
+            demo.src = "";
+            name.value = "";
+            money.value = "";
+            introduce = "";
+            Q.value= "";
+            project.value = "";
+            listed.value = "";
+            selectProduct.value = "";
         }
         //console.log(document.getElementById('file').files);
      }
     })
     document.getElementById("check").addEventListener("click", function() {
         let id = document.getElementById('selectProduct').value;
-        let name = document.getElementById('name').value;
-        let money = document.getElementById('money').value;
-        let introduce = document.getElementById('introduce').value;
-        let quantity = document.getElementById('Q').value;
-        let project_id = document.getElementById('project').value;
-        let listed = document.getElementById('listed').value;
-        let jsn = JSON.stringify({"id":id, "name":name, 'money':money, 'introduce':introduce, 'quantity':quantity, 'project_id':project_id, 'listed':listed});
+        let jsn = JSON.stringify({"id":id, "name":name.value, 'money':money.value, 'introduce':introduce.value, 'quantity':Q.value, 'project_id':project.value, 'listed':listed.value});
         xhr = new XMLHttpRequest();
         xhr.open('post','{{route('house.up')}}');
         xhr.setRequestHeader('X-CSRF-TOKEN', '<?PHP echo csrf_token() ?>');
@@ -114,23 +115,23 @@
     xhr.onload = function() {
         try {
             let result = JSON.parse(this.responseText);
-            document.getElementById('demo').src = result["url"];
-            document.getElementById('name').value = result["name"];
-            document.getElementById('money').value = result["money"];
-            document.getElementById('introduce').value = result["introduce"];
-            document.getElementById('Q').value = result["quantity"];
-            document.getElementById('project').value = result["project_id"];
-            document.getElementById('listed').value = result["listed"];
+            demo.src = result["url"];
+            name.value = result["name"];
+            money.value = result["money"];
+            introduce.value = result["introduce"];
+            Q.value = result["quantity"];
+            project.value = result["project_id"];
+            listed.value = result["listed"];
         } catch (e) {
             window.alert(this.responseText);
-            document.getElementById('demo').src = "";
-            document.getElementById('name').value = "";
-            document.getElementById('money').value = "";
-            document.getElementById('introduce').value = "";
-            document.getElementById('Q').value = "";
-            document.getElementById('project').value = "";
-            document.getElementById('listed').value = "";
-            document.getElementById('selectProduct').value = "";
+            demo.src = "";
+            name.value = "";
+            money.value = "";
+            introduce.value = "";
+            Q.value = "";
+            project.value = "";
+            listed.value = "";
+            selectProduct.value = "";
         }
         //console.log(document.getElementById('file').files);
      }
