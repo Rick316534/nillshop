@@ -34,22 +34,15 @@
 
     <form class="form-signin" method="POST" action="{{route('register')}}">
         {{ csrf_field() }}
-        
         <h2 class="form-signin-heading">註冊：</h2>
         <input type="text" name="name" id="name" class="form-control" placeholder="名字" required autofocus style="border-radius: 20px;margin-bottom:10px">
-        <input type="email" name="email" id="email" class="form-control" placeholder="郵箱" required autofocus style="border-radius: 20px;margin-bottom:10px">
-        <input type="text" name="phone" id="phone" class="form-control" placeholder="電話" required style="border-radius: 20px;margin-bottom:10px" maxlength="10">
-        <input type="text" name="address" id="address" class="form-control" placeholder="地址" required style="border-radius: 20px;margin-bottom:10px">
         <input type="password" name="password" id="password" class="form-control" placeholder="輸入密碼" required style="border-radius: 20px;">
         <input type="password" name="password_confirmation" class="form-control" placeholder="重複輸入密碼" required style="border-radius: 20px;">
-        
-        <input type="hidden" name="lv" id="lv" class="form-control" value="1">
         @include('layouts.errors')
         <button class="btn btn-lg btn-primary " type="submit" style="border-radius: 20px;">註冊</button>
         <button class="btn btn-lg btn-primary " type="reset" style="border-radius: 20px;">重製輸入</button>
         <button class="btn btn-lg btn-primary " type="button" onclick="history.back()" style="border-radius: 20px;">取消</button>
     </form>
-
 </div>
 
 </body>

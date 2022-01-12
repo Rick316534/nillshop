@@ -11,29 +11,26 @@ class LoginController extends Controller
     public function index()
     {
         //渲染註冊頁面
-        return view('login');
+        return view('door.login');
     }
     public function login(Request $request)
     {
         //驗證
-        $this->validate(request(),[
-            'email' => 'required|string|email|max:255|regex:/([\w\-]+\@[\w\-]+\.[\w\-]+$)/',
+        $this->validate(\request(),[
+            'name' => 'required|string|max:255|regex:/^[A-Za-z0-9_]+$/',
             'password' => 'required|string|min:6|regex:/^[A-Za-z0-9]+$/', 
         ]);
         //查尋
-        $remember_me = $request['remeber_me'];
         if (Auth::attempt([
-            'email' => $request['email'],
+            'name' => $request['name'],
             'password' => $request['password'],
-        ], $remember_me)) {
+        ], false)) {
 
             return view('home');
             
         } else {
-            return view('login');
+            return view('door.login');
         }
-       
-        //渲染註冊頁面
 
     }
     public function logout()

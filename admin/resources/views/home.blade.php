@@ -1,51 +1,21 @@
-@extends('layouts.app')
-
-@section('content')
-    <div>
-        <div class="menu" style="display: flex;margin: 0 auto">
-            <div>
-                <ul id="user" style="margin: 50px;text-align: center;">
-                    帳號管理
-                    <li id='storeMember' style="padding: 9px; ">
-                        <a href="{{ route('member.index') }}">
-                            帳號管理
-                        </a>
-                        
-                    </li>
-                </ul>
-            </div>
-            <div>
-                <ul style="margin: 50px">
-                    訂單管理
-                </ul>
-            </div>
-            <div>
-                <ul style="margin: 50px;text-align: center;">
-                    庫存管理
-                    <li id='editProduct' style="padding: 9px; ">
-                        <a href="{{ route('house.jump',['rout' => 'e']) }}">
-                            編輯商品
-                        </a>
-                        
-                    </li>
-                    <li id='newProduct' style="padding: 9px; ">
-                        <a href="{{ route('house.jump',['rout' => 'n']) }}">
-                            新增商品
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            
-            <div>
-                <ul style="margin: 50px">退貨管理
-                
-                </ul>
-            </div>
-            
-            
-        </div>
-    </div>
-    <div class="show">
-
-    </div>
-@endsection
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>首頁</title>
+</head>
+<body>
+    <h1>{{Auth::user()}}</h1>
+    @guest
+        <a href="{{route('regist')}}">註冊</a>
+        <a href="{{route('log')}}">登入</a>
+    @else
+        <a href="{{route('logout')}}">登出</a>
+        <a href="{{route('product',['rout' => 'a'])}}">新增商品</a>
+        <a href="{{route('product',['rout' => 'e'])}}">編輯商品</a>
+    @endguest
+    
+</body>
+</html>

@@ -1,7 +1,5 @@
 <?php
 
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,26 +11,23 @@
 |
 */
 
-
-
-Auth::routes();
-
-Route::get('/', 'HomeController@index')->name('home');
-Route::get('/home', 'HomeController@index')->name('home');
-
-use App\Http\Controllers\HomeController;
-use Illuminate\Auth\Access\Response;
-
-Route::get('/test', function(){
-    return App\User::all();
+Route::get('/', function () {
+    return view('welcome');
 });
- 
-Route::get('/storehouse/{rout?}', 'StorehouseController@jump')->name('house.jump');
-Route::post('/housestore', 'StorehouseController@store')->name('house.store');
-Route::post('/houseup', 'StorehouseController@up')->name('house.up');
-Route::post('/productedit/{name?}', 'StorehouseController@select')->name('house.select');
-Route::post('/memberstore', 'MemberController@store')->name('member.store');
-Route::get('/memberindex', 'MemberController@index')->name('member.index');
-Route::post('/memberup', 'MemberController@up')->name('member.up');
-Route::post('/memberdelete', 'MemberController@delete')->name('member.delete');
-Route::post('/memberpsw', 'MemberController@psw')->name('member.psw');
+
+//Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+//註冊
+Route::get('registview','RegisterController@index')->name('regist');
+Route::post('regist','RegisterController@register')->name('register');
+//登入｜登出
+Route::get('log','LoginController@index')->name('log');
+Route::post('login','LoginController@login')->name('login');
+Route::get('logout','LoginController@logout')->name('logout');
+//商品操作
+Route::get('product/{rout?}','ProductController@index')->name('product');
+Route::post('addproduct','ProductController@add')->name('addproduct');
+Route::post('findproduct','ProductController@store')->name('findproduct');
+Route::post('editproduct','ProductController@up')->name('editproduct');

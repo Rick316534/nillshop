@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Admin;
+use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+
 class RegisterController extends Controller
 {
     /*
@@ -26,7 +27,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
@@ -38,7 +39,6 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-    
     /**
      * Get a validator for an incoming registration request.
      *
@@ -49,21 +49,22 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
-    
+
     /**
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\Admin
+     * @return \App\User
      */
-    
     protected function create(array $data)
     {
-        return Admin::create([
-            'id' => $data['name'],
+        return User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
     }

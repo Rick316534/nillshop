@@ -32,11 +32,11 @@
 
 <div class="container">
 
-    <form class="form-signin" method="POST" action="{{route('login')}}">
+    <form class="form-signin" method="POST" action="{{ route('login') }}">
         {{ csrf_field() }}
         @include('layouts.errors')
         <h2 class="form-signin-heading">請登入</h2>
-        <input type="email" name="email" id="email" class="form-control" placeholder="Email address" required autofocus style="border-radius: 20px;margin-bottom:5px">
+        <input type="text" name="name" id="name" class="form-control" placeholder="name,can't enter chinese" required autofocus style="border-radius: 20px;margin-bottom:5px">
         <input type="password" name="password" id="password" class="form-control" placeholder="Password" required style="border-radius: 20px;">
         <div class="checkbox">
             <label>
@@ -44,7 +44,7 @@
             </label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit" style="border-radius: 20px;">登陸</button>
-        <a href="{{route('regist')}}" class="btn btn-lg btn-primary btn-block" type="submit" style="border-radius: 20px;">去註冊>></a> 
+        <a href="{{ route('regist') }}" class="btn btn-lg btn-primary btn-block" type="submit" style="border-radius: 20px;">去註冊>></a> 
         <button class="btn btn-lg btn-primary btn-block " type="button" onclick="history.back()" style="border-radius: 20px;">取消</button>
     </form>
 
