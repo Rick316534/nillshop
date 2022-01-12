@@ -40,7 +40,7 @@
         <input type="password" name="password" id="password" class="form-control" placeholder="Password" required style="border-radius: 20px;">
         <div class="checkbox">
             <label>
-                <input type="checkbox" value="1" name="remember_me"> 記住我
+                <input type="checkbox" value="1" name="remember_me"> 記住密碼
             </label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit" style="border-radius: 20px;">登陸</button>

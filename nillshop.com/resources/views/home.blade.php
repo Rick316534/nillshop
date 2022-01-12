@@ -35,7 +35,10 @@
         <a href="{{route('log')}}">登入</a>
     @else
         <a href="{{route('logout')}}">登出</a>
+        <a href="{{route('member')}}">會員中心</a>
         <h2>你好：<span>{{ Auth::user()->name }}</span> </h2>
+        <h2>驗證：<span>{{ Auth::user() }}</span> </h2>
+        
     @endguest
     
     
