@@ -43,7 +43,6 @@
         <input type="password" name="password" id="password" class="form-control" placeholder="輸入密碼" required style="border-radius: 20px;">
         <input type="password" name="password_confirmation" class="form-control" placeholder="重複輸入密碼" required style="border-radius: 20px;">
         
-        <input type="hidden" name="lv" id="lv" class="form-control" value="1">
         @include('layouts.errors')
         <button class="btn btn-lg btn-primary " type="submit" style="border-radius: 20px;">註冊</button>
         <button class="btn btn-lg btn-primary " type="reset" style="border-radius: 20px;">重製輸入</button>

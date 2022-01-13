@@ -16,7 +16,8 @@ class CreateReturnsTable extends Migration
         Schema::create('returns', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->string('order_id');
+            $table->integer('order_id');
+            $table->string('content');
         });
     }
 

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Admin;
 
+use Illuminate\Support\Facades\Hash;
+
 class RegisterController extends Controller
 {
     public function index()
@@ -23,7 +25,7 @@ class RegisterController extends Controller
 
         Admin::create(([
             'name' => $request['name'], 
-            'password' => bcrypt($request['password']), 
+            'password' => Hash::make($request['password']), 
         ]));
         return view('door.login');
     }

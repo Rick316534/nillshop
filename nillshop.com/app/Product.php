@@ -3,10 +3,13 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
+
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Member extends Authenticatable
+class Product extends Authenticatable
 {
+    public $timestamps = false;
+
     use Notifiable;
 
     /**
@@ -15,7 +18,7 @@ class Member extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'lv', 'phone','address', 'money', 'status', 
+        'name', 'project_id', 'introduce', 'money', 'listed', 'url', 'quantity',"id"
     ];
 
     /**
@@ -24,6 +27,6 @@ class Member extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'lv',
+        
     ];
 }

@@ -18,10 +18,10 @@ class CreateProductsTable extends Migration
             $table->string('project_id');
             $table->string('name');
             $table->string('introduce');
-            $table->string('money');
+            $table->integer('money');
             $table->string('listed');
             $table->string('url');
-            $table->string('quantity');
+            $table->integer('quantity');
         });
     }
 

@@ -16,10 +16,15 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         //驗證
-        $this->validate(\request(),[
-            'name' => 'required|string|max:255|regex:/^[A-Za-z0-9_]+$/',
-            'password' => 'required|string|min:6|regex:/^[A-Za-z0-9]+$/', 
-        ]);
+        try {
+            $this->validate(\request(),[
+                'name' => 'required|string|max:255|regex:/^[A-Za-z0-9_]+$/',
+                'password' => 'required|string|min:6|regex:/^[A-Za-z0-9]+$/', 
+            ]);
+        } catch (\Exception $e) {
+            return view('door.login');
+        }
+        
         //查尋
         if (Auth::attempt([
             'name' => $request['name'],
@@ -29,7 +34,7 @@ class LoginController extends Controller
             return view('home');
             
         } else {
-            return view('door.login');
+            return '<script> window.alert("帳號或密碼錯誤") </script>'. view('door.login');
         }
 
     }

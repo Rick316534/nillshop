@@ -7,14 +7,14 @@
     <title>首頁</title>
 </head>
 <body>
-    <h1>{{Auth::user()}}</h1>
     @guest
         <a href="{{route('regist')}}">註冊</a>
         <a href="{{route('log')}}">登入</a>
     @else
-        <a href="{{route('logout')}}">登出</a>
-        <a href="{{route('product',['rout' => 'a'])}}">新增商品</a>
-        <a href="{{route('product',['rout' => 'e'])}}">編輯商品</a>
+        <a href="{{ route('logout') }}">登出</a>
+        <a href="{{ route('product',['rout' => 'a']) }}">新增商品</a>
+        <a href="{{ route('product',['rout' => 'e']) }}">編輯商品</a>
+        <a href="{{ route('member') }}">帳號列表</a>
     @endguest
     
 </body>

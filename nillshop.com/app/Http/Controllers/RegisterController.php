@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Member;
 
+use Illuminate\Support\Facades\Hash;
+
 class RegisterController extends Controller
 {
     public function index()
@@ -22,16 +24,17 @@ class RegisterController extends Controller
             'password' => 'required|string|min:6|regex:/^[A-Za-z0-9]+$/|confirmed',
             'address' => 'required|string|max:255',
             'phone' => 'required|string|min:10|max:10|regex:/^[\d]+$/',
-            'lv' => 'required|integer|max:1',
         ]);
 
         Member::create(([
             'name' => $request['name'], 
             'email' => $request['email'], 
-            'password' => bcrypt($request['password']), 
+            'password' => Hash::make($request['password']), 
             'address' => $request['address'], 
             'phone' => $request['phone'], 
-            'lv' => $request['lv'],
+            'lv' => '1',
+            'money' => 0,
+            'status' => true,
         ]));
         return view('login');
     }

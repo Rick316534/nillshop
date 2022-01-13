@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 
+use App\Member;
+
 class LoginController extends Controller
 {
     public function index()
@@ -27,18 +29,23 @@ class LoginController extends Controller
             'password' => $request['password'],
         ], $remember_me)) {
 
-            return view('home');
+            $status = Member::where('email',$request['email'])->first();
+            if ($status['status']) {
+                return view('home') ;//渲染註冊頁面
+            } else {
+                return view('login'). "<script>window.alert('帳號停用');</script>";//渲染註冊頁面
+            }
             
         } else {
-            return view('login');
+            return view('login'). "<script>window.alert('帳號或密碼錯誤');</script>";//渲染註冊頁面
         }
        
-        //渲染註冊頁面
+        
 
     }
     public function logout()
     {
         Auth::logout();
-        return view('home');
+        return view('home');//渲染註冊頁面
     }
 }

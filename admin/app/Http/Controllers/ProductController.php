@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Product;
-use Carbon\Carbon;
 
 class ProductController extends Controller
 {
@@ -13,7 +12,7 @@ class ProductController extends Controller
     {
         //渲染註冊頁
         
-        $rout->input('rout');
+       // $rout->input('rout');
         switch ($rout["rout"])
         {
             case "e":
@@ -75,7 +74,7 @@ class ProductController extends Controller
     public function up(Request $request)
     {
         try {
-            Product::where('id',$request['id'])->update([
+            Product::where('id', $request['id'])->update([
             'name' => $request['name'], 
             'money' => $request['money'], 
             'quantity' => $request['quantity'],

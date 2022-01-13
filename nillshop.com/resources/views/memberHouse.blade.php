@@ -7,12 +7,14 @@
     <title>Document</title>
 </head>
 <body>
-    <h2>今天天氣好</h2>
-    <a href="{{route('home')}}">首頁</a>
+    
     @guest
+        <a href="{{ route('home') }}">首頁</a>
     @else
-    <h2>{{ Auth::user()->name }}</h2>
-    <h2>查看：{{Auth::user()}}</h2>
+        <a href="{{ route('home') }}">首頁</a>
+        <a href="{{ route('memberstore',['rout' => 'e']) }}">查看帳號資訊</a>
+        <a href="{{ route('memberstore',['rout' => 'o']) }}">查看歷史訂單</a>
+        <a href="{{ route('memberstore',['rout' => 'r']) }}">查看退貨紀錄</a>
     @endguest
 </body>
 </html>
