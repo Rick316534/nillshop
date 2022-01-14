@@ -95,7 +95,6 @@ class MemberController extends Controller
             } else {
                 return "密碼錯誤";
             }
-            
             return "存檔成功";
         } catch (\Exception $e) {
             return "存檔失敗";

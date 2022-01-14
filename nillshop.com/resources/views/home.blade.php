@@ -1,26 +1,3 @@
-{{-- @extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
-
-                <div class="panel-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection --}}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,6 +7,7 @@
     <title>Document</title>
 </head>
 <body>
+    <a href="{{route('home')}}">首頁</a>
     @guest
         <a href="{{route('regist')}}">註冊</a>
         <a href="{{route('log')}}">登入</a>
@@ -40,7 +18,14 @@
         
          
     @endguest
-    <div class="content" style="display: flex">
+    <div class="header">
+        {{-- <form action="">
+            <input type="text">
+            <input type="button">
+        </form> --}}
+       
+    </div>
+    <div class="content" id="content" style="display: flex">
         <div class="menu" style="margin-right: 20px">
         <ul>
             <li>電子</li>
@@ -48,37 +33,84 @@
             <li>生活</li>
         </ul>
         </div>
-        <div class="show" style="margin-top:20px ">
-            <div id="" >
-                <div style="display: flex">
-                    <img height="100px" src="http://admin.com/image/2022-01-13 08:11:09茶壺.jpeg" alt="">
-                <div>
-                    <p>今天天氣真好<p>
-                    <p>價格：200<p>
-                    
-                </div>
-                </div>
-                
-                <input type="button" value="加入購物車">
-                <input type="button" name="" id="" value="結帳">
-            </div>
+        <div class="show" id="show" style='margin-top:20px;display:flex;'>
+
         </div>
     </div>
     
-    
 </body>
 <script>
+    // 首頁商品欄位
     xhr = new XMLHttpRequest();
-    xhr.open('post','{{ route('show') }}');
+    xhr.open('get','{{ route('show') }}');
     xhr.setRequestHeader('X-CSRF-TOKEN', '<?PHP echo csrf_token() ?>');
     xhr.setRequestHeader("Content-type","application/json; charset=utf-8");
     xhr.send();
     xhr.onload = function() {
+        let showString = "";
         obj = JSON.parse(this.responseText);
-        //console.log(obj);
         obj.forEach(element => {
-            document.getElementById('show'),innerHTML = "" 
+            let route = element.id ;
+            if (showString == "") {
+                showString = 
+                    "<div id='" + element.id + "' class='box' >" +
+                        "<div style='display:flex;width:200px'>" + 
+                            "<img height='100px'src='" + element.url + "' alt='' style='cursor: pointer' onclick='who(" + element.id + ")'>" +
+                        "<div>" +
+                            "<p>" + element.name + "<p>" +
+                            "<p> 價格：" + element.money + "<p>" +
+                        "</div>" +
+                        "</div>" +
+                        "<input type='button' value='加入購物車'>" +
+                        "<input type='button' name='' id='' value='結帳'>" +
+                    "</div>";
+            } else {
+                showString += 
+                    "<div id='" + element.id + "' class='box' >" +
+                        "<div style='display:flex;width:200px''>" +
+                            "<img height='100px'src=\'" + element.url + "" + "\' alt='' style='cursor: pointer' onclick='who(" + element.id + ")'>" +
+                        "<div>" +
+                            "<p>" + element.name + "<p>" +
+                            "<p> 價格：" + element.money + "<p>" +
+                        "</div>" +
+                        "</div>" +
+                        "<input type='button' value='加入購物車'>" +
+                        "<input type='button' name='' id='' value='結帳'>" +
+                    "</div>";
+            };  
         });
+        document.getElementById('show').innerHTML = showString;
+    };
+
+    //商品頁面
+    function who(id) 
+    {
+        let showString = "";
+        xhr = new XMLHttpRequest();
+        xhr.open('post','{{ route('productstore') }}');
+        xhr.setRequestHeader('X-CSRF-TOKEN', '<?PHP echo csrf_token() ?>');
+        xhr.setRequestHeader("Content-type","application/json; charset=utf-8");
+        xhr.send(JSON.stringify({"id":id}));
+        xhr.onload = function() {
+            obj = JSON.parse(this.responseText)[0];
+            showString = 
+                "<div id='" + obj.id + "' class='box' >" +
+                    "<div style='display:flex;max-width:100%'>" +
+                        "<div style='text-align:center'>" +
+                            "<img height='200px'src='" + obj.url + "' alt='' " +
+                            "<p>" + obj.name + "<p>" +
+                        "</div>" +
+                        "<div>" +
+                            "<p> 內容：" + obj.introduce + "<p>" +
+                            "<p> 價格：" + obj.money + "<p>" +
+                        "</div>" +
+                    "</div>" +
+                    "<input type='button' value='加入購物車'>" +
+                    "<input type='button' name='' id='' value='結帳'>" +
+                "</div>" ;
+            document.getElementById('content').innerHTML = showString;
+        }
+        
     }
     
 </script>

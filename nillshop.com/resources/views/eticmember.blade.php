@@ -63,6 +63,7 @@
     let lv = document.getElementById('lv');
     let address = document.getElementById('address');
     let phone = document.getElementById('phone');
+
     //載入會員資料
     xhr = new XMLHttpRequest();
     xhr.open('post','{{ route('search') }}');
@@ -81,7 +82,8 @@
         } catch (e) {
             window.alert(this.responseText);
         }
-    }
+    };
+
     //存檔更新內容
     document.getElementById('save').addEventListener(
         "click", 
@@ -107,6 +109,7 @@
             }
         }
     );
+
     //更改密碼顯示
     document.getElementById('psw').addEventListener(
         "click", 
@@ -115,6 +118,7 @@
             document.getElementById('pswshow').style.display = 'flex';
         }
     );
+
     //更改密碼清空內容，取消顯示
     document.getElementById('reset').addEventListener(
         "click", 
@@ -125,6 +129,7 @@
             document.getElementById('pswshow').style.display = "none" ;
         }
     );
+    
     //送出更改密碼請求
     document.getElementById('newpsw').addEventListener(
         "click", 

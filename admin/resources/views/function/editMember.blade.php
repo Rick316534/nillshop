@@ -27,7 +27,7 @@
             <input type="email"  name="email" id="email" style="width: 200px;">
             <input type="button" style="width: 60px;margin-bottom:8px;" id="search" value="搜尋">
             
-            <a href="/" style="text-align: center;display: block;margin-bottom:-5px;" >回到首頁</a><br>
+            <a href="{{ route('home') }}" style="text-align: center;display: block;margin-bottom:-5px;" >回到首頁</a><br>
         </div>
         <form action="{{ route('editproduct') }}" method="post" style="display:flex;justify-content: space-around;flex-wrap: wrap;width:200px " enctype="multipart/form-data" required>
             {{ csrf_field() }}

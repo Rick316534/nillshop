@@ -60,7 +60,7 @@
         </form>
         @include('layouts.errors')
         <div>
-            <a href="/">回到首頁</a><br>
+            <a href="{{ route('home') }}">回到首頁</a><br>
         </div>
     </div>
     

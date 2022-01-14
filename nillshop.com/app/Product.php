@@ -18,7 +18,7 @@ class Product extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'project_id', 'introduce', 'money', 'listed', 'url', 'quantity',"id"
+        'name', 'project_id', 'introduce', 'money', 'listed', 'url', 'quantity', "id",  
     ];
 
     /**

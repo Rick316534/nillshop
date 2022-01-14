@@ -12,7 +12,7 @@ class MemberController extends Controller
 {
     public function index()
     {
-        return view('function.editMember');
+        return view('list.member');
     }
 
     public function store(Request $request)

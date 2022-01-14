@@ -32,4 +32,6 @@ Route::post('membersearch','MemberController@search')->name('search');
 Route::post('memberup','MemberController@up')->name('up');
 Route::post('membernewpsw','MemberController@editPassword')->name('newpsw');
 //商品
-Route::post('show','ProductController@show')->name('show');
+Route::get('show/{id?}','ProductController@show')->name('show');
+Route::post('productstore','ProductController@store')->name('productstore');
+//Route::post('showintroduce/{id}','ProductController@show')->name('show');
