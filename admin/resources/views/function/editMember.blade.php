@@ -145,7 +145,6 @@
             document.getElementById('password').value = "";
             document.getElementById('password_confirmation').value = "";
             document.getElementById('pswshow').style.display = "none" ;
-            document.getElementById('psw').style.display = "none" ;  
         }
     );
 

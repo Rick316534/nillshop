@@ -35,21 +35,35 @@
             <textarea class="form-control" name="address" id="address" cols="20" rows="10" maxlength="50" ></textarea>
             <label for="phone" style="margin: 5px auto">帳號電話</label>
             <input  class="form-control" type="text" id="phone" name="phone" required>
-            <label for="money" style="margin: 5px auto">帳號餘額</label>
-            <input class="form-control" type="text" id="money" name="money" required>    
+            <label for="money" style="margin: 5px auto" >帳號餘額</label>
+            <input class="form-control" type="text" id="money" name="money" disabled='true' required>    
             <input class="btn btn-lg btn-primary btn-block" type="button" value="存檔" id="save" style="margin: 10px auto;width:100px">
             <input class="btn btn-lg btn-primary btn-block" type="button" value="更改密碼" id="psw" style="margin: 10px auto;width:125px;display:none">
         </form>
         @include('layouts.errors')
         <a href="/" style="text-align: center;display: block;margin-bottom:-5px;" >回到首頁</a><br>
     </div>
+    <div class="pswshow" id="pswshow" style="position: fixed;width:100%;height:150%;justify-content: center; margin-top:-20px;display:none">
+        <form action="" method="post" style="display:flex;justify-content: space-around;flex-wrap: wrap;width:200px;align-content: center;margin-top:-300px;" enctype="multipart/form-data" required>
+            {{ csrf_field() }}
+            <input type="password" name="password_old" id="password_old" class="form-control"  placeholder="輸入舊密碼" required style="border-radius: 20px;margin-bottom:10px">
+            <input type="password" name="password" id="password" class="form-control"  placeholder="輸入密碼" required style="border-radius: 20px;margin-bottom:10px">
+            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" placeholder="重複輸入密碼" required style="border-radius: 20px;">
+            <input class="btn btn-lg btn-primary btn-block" type="button" value="送出" id="newpsw" style="margin: 10px auto;width:100px">
+            <input class="btn btn-lg btn-primary btn-block" type="button" value="取消" id="reset" style="margin: 10px auto;width:100px">
+        </form>
+        <div style="opacity: 0.85;position: absolute;width:100%;height:100%;margin-top:-20px;background-color:black;z-index:-1">
+        </div>
+    </div>
 </body>
 <script>
+    //宣個輸入框
     let name = document.getElementById('name');
     let money = document.getElementById('money');
     let lv = document.getElementById('lv');
     let address = document.getElementById('address');
     let phone = document.getElementById('phone');
+    //載入會員資料
     xhr = new XMLHttpRequest();
     xhr.open('post','{{ route('search') }}');
     xhr.setRequestHeader('X-CSRF-TOKEN', '<?PHP echo csrf_token() ?>');
@@ -57,17 +71,81 @@
     xhr.send();
     xhr.onload = function() {
         try {
-            // let result = JSON.parse(this.responseText);
-            // name.value = result['name'];
-            // money.value = result['money'];
-            // lv.value = result['lv'];
-            // phone.value = result['phone'];
-            // address.value = result['address'];
-            console.log(this.responseText);
+            let result = JSON.parse(this.responseText);
+            name.value = result['name'];
+            money.value = result['money'];
+            lv.value = result['lv'];
+            phone.value = result['phone'];
+            address.value = result['address'];
+            document.getElementById('psw').style.display = "block";
         } catch (e) {
             window.alert(this.responseText);
         }
     }
+    //存檔更新內容
+    document.getElementById('save').addEventListener(
+        "click", 
+        function() 
+        {
+            let jsn = JSON.stringify({"phone":phone.value, "address":address.value, "name":name.value, "money":money.value});
+            xhr = new XMLHttpRequest();
+            xhr.open('post','{{ route('up') }}');
+            xhr.setRequestHeader('X-CSRF-TOKEN', '<?PHP echo csrf_token() ?>');
+            xhr.setRequestHeader("Content-type","application/json; charset=utf-8");
+            xhr.send(jsn);
+            xhr.onload = function() {
+                try {
+                    let result = JSON.parse(this.responseText);
+                    name.value = result['name'];
+                    money.value = result['money'];
+                    lv.value = result['lv'];
+                    phone.value = result['phone'];
+                    address.value = result['address'];
+                } catch (e) {
+                    window.alert(this.responseText);
+                }
+            }
+        }
+    );
+    //更改密碼顯示
+    document.getElementById('psw').addEventListener(
+        "click", 
+        function() 
+        {
+            document.getElementById('pswshow').style.display = 'flex';
+        }
+    );
+    //更改密碼清空內容，取消顯示
+    document.getElementById('reset').addEventListener(
+        "click", 
+        function() 
+        {
+            document.getElementById('password').value = "";
+            document.getElementById('password_confirmation').value = "";
+            document.getElementById('pswshow').style.display = "none" ;
+        }
+    );
+    //送出更改密碼請求
+    document.getElementById('newpsw').addEventListener(
+        "click", 
+        function() 
+        {
+            let jsn = JSON.stringify({"password_old":document.getElementById('password_old').value, "password":document.getElementById('password').value, "password_confirmation":document.getElementById('password_confirmation').value});
+            xhr = new XMLHttpRequest();
+            xhr.open('post','{{ route('newpsw') }}');
+            xhr.setRequestHeader('X-CSRF-TOKEN', '<?PHP echo csrf_token() ?>');
+            xhr.setRequestHeader("Content-type","application/json; charset=utf-8");
+            xhr.send(jsn);
+            xhr.onload = function() {
+                window.alert(this.responseText);
+                document.getElementById('password_old').value = "";
+                document.getElementById('password').value = "";
+                document.getElementById('password_confirmation').value = "";
+                document.getElementById('pswshow').style.display = "none" ;  
+
+            }
+        }
+    );
 </script>
 
 </html>

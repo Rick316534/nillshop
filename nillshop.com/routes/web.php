@@ -18,6 +18,9 @@ Route::get('/', 'HomeController@index')->name('home');
 //註冊
 Route::get('registview','RegisterController@index')->name('regist');
 Route::post('regist','RegisterController@register')->name('register');
+
+//登入驗證通過才可使用的路徑
+
 //登入登出
 Route::get('log','LoginController@index')->name('log');
 Route::post('login','LoginController@login')->name('login');
@@ -26,5 +29,7 @@ Route::get('logout','LoginController@logout')->name('logout');
 Route::get('memberhouse','MemberController@index')->name('member');
 Route::get('member/{rout?}','MemberController@store')->name('memberstore');
 Route::post('membersearch','MemberController@search')->name('search');
+Route::post('memberup','MemberController@up')->name('up');
+Route::post('membernewpsw','MemberController@editPassword')->name('newpsw');
 //商品
 Route::post('show','ProductController@show')->name('show');
