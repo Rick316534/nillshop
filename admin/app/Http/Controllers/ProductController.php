@@ -12,15 +12,50 @@ class ProductController extends Controller
     {
         //渲染註冊頁
         
-       // $rout->input('rout');
         switch ($rout["rout"])
         {
             case "e":
-                return view('function.editProduct');
+                return view('list.product');
                 break;
             case "a":
                 return view('function.addProduct');
                 break;
+        }
+    }
+
+    public function onload(Request $request)
+    {
+       return view('function.editProduct');
+    }
+
+    public function all(Request $request)
+    {
+        try {
+            $result = Product::all();
+            return $result;
+        } catch (\Exception $e) {
+            return "未知錯誤";
+        }
+    }
+
+    public function set(Request $request)
+    {
+        try {
+            session()->forget('id');
+            session()->put('id', $request['id']);
+            return session()->all();
+        } catch (\Exception $e) {
+            return "未知錯誤";
+        }
+    }
+
+    public function search(Request $request)
+    {
+        try {
+            $result = Product::where('name', 'like', '%'. $request['name']. '%')->get();
+            return $result;
+        } catch (\Exception $e) {
+            return "查無此id";
         }
     }
 
@@ -55,7 +90,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         try {
-            $result = Product::where('id',$request['id'])->first();
+            $result = Product::where('id', session()->get('id'))->first();
             $url = $result['url'];
             $name = $result['name'];
             $quantity = $result['quantity'];
@@ -64,11 +99,21 @@ class ProductController extends Controller
             $project_id = $result['project_id'];
             $introduce = $result['introduce'];
             $DB = json_encode(array('url'=>$url, 'name'=>$name, 'quantity'=>$quantity, 'money'=>$money, 'listed'=>$listed, 'project_id'=>$project_id, 'introduce'=>$introduce));
-            return $DB;
+            return $result;
         } catch (\Exception $e) {
             return "查無此ID";
         }
         
+    }
+
+    public function delete(Request $request)
+    {
+        try {
+            $result = Product::where('id', $request['id'])->delete();
+            return "刪除成功";
+        } catch (\Exception $e) {
+            return "查無此帳號";
+        }
     }
 
     public function up(Request $request)

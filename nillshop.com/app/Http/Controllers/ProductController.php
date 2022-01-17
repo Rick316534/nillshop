@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 use App\Product;
+use Illuminate\Contracts\Session\Session;
 use PhpParser\Node\Expr\Cast\Object_;
-
+use App\Car;
 class ProductController extends Controller
 {
     //商品顯示
@@ -41,16 +42,17 @@ class ProductController extends Controller
     }                            
 
     //商品搜尋
-    public function select(Request $request)
+    public function search(Request $request)
     {
-        $result = Product::where('name', 'Like', "%". $request['id']. "%")
+        $datas = Product::where('name', 'Like', "%". $request['name']. "%")
                     ->where('listed', '1')
                     ->orderBy('money','desc')
-                    ->get()
-                    ->toArray();
+                    ->get();
+                    
 
-        return $result ;
+        return $datas ;
     }
+
     //商品頁面
     public function store(Request $request)
     {
@@ -65,4 +67,22 @@ class ProductController extends Controller
         }
     }
     
+    //新增購物車
+    public function carset(Request $request)
+    {
+        // session()->pull('carid', $request['id']);
+        // session()->push('carid', $request['id']);
+        // return Session()->all();
+        try {
+            Car::create(([
+                'id' => Auth::id(),
+                'Pid' => $request['pid'],
+            ]));
+            return "以加入購物車";
+        } catch (\Exception $e) {
+            return $request['pid'];
+        }
+        
+        
+    }
 }

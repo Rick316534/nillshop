@@ -24,7 +24,7 @@
     <div>
         <form action="{{ route('addproduct') }}" method="post" style="display:flex;justify-content: space-around;flex-wrap: wrap; " enctype="multipart/form-data" required>
             {{ csrf_field() }}
-            <div style="width: 200px;margin-right:50px">
+            <div style="width: 200px;margin-right:300px">
                 <label for="img_input">上傳圖片:</label>
                 <input type="file" id="imginp" name="file" accept="image/*">
                 <img src="" id="demo" height="200" style="margin-top: 10px">

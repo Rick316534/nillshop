@@ -23,11 +23,7 @@
 <body style="display: flex;justify-content: center;">
     <div>
         <div style="margin-left:-80px">
-            <label for="email">會員Email：</label>
-            <input type="email"  name="email" id="email" style="width: 200px;">
-            <input type="button" style="width: 60px;margin-bottom:8px;" id="search" value="搜尋">
-            
-            <a href="{{ route('home') }}" style="text-align: center;display: block;margin-bottom:-5px;" >回到首頁</a><br>
+            <input type="hidden"  name="email" id="email" style="width: 200px;">
         </div>
         <form action="{{ route('editproduct') }}" method="post" style="display:flex;justify-content: space-around;flex-wrap: wrap;width:200px " enctype="multipart/form-data" required>
             {{ csrf_field() }}
@@ -75,34 +71,29 @@
     let address = document.getElementById('address');
     let phone = document.getElementById('phone');
 
-    document.getElementById('search').addEventListener(
-        "click", 
-        function() 
-        {
-            let jsn = JSON.stringify({"email":email.value});
-            xhr = new XMLHttpRequest();
-            xhr.open('post','{{ route('findmember') }}');
-            xhr.setRequestHeader('X-CSRF-TOKEN', '<?PHP echo csrf_token() ?>');
-            xhr.setRequestHeader("Content-type","application/json; charset=utf-8");
-            xhr.send(jsn);
-            xhr.onload = function() {
-                try {
-                    let result = JSON.parse(this.responseText);
-                    name.value = result['name'];
-                    money.value = result['money'];
-                    lv.value = result['lv'];
-                    status.value = result['status'];
-                    phone.value = result['phone'];
-                    address.value = result['address'];
-                    document.getElementById('psw').style.display = "block" ;
-                } catch (e) {
-                    window.alert(this.responseText);
-                    email.value = "";
-                    document.getElementById('psw').style.display = "none" ;
-                }
-            }
+    xhr = new XMLHttpRequest();
+    xhr.open('post','{{ route('findmember') }}');
+    xhr.setRequestHeader('X-CSRF-TOKEN', '<?PHP echo csrf_token() ?>');
+    xhr.setRequestHeader("Content-type","application/json; charset=utf-8");
+    xhr.send();
+    xhr.onload = function() {
+        try {
+            let result = JSON.parse(this.responseText);
+            email.value = result['email'];
+            name.value = result['name'];
+            money.value = result['money'];
+            lv.value = result['lv'];
+            status.value = result['status'];
+            phone.value = result['phone'];
+            address.value = result['address'];
+            document.getElementById('psw').style.display = "block" ;
+            console.log(result);
+        } catch (e) {
+            window.alert(this.responseText);
+            email.value = "";
+            document.getElementById('psw').style.display = "none" ;
         }
-    );
+    }
 
     document.getElementById('save').addEventListener(
         "click", 

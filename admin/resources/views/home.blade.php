@@ -8,7 +8,7 @@
 </head>
 <body>
     @guest
-        <a href="{{route('regist')}}">註冊</a>
+        {{-- <a href="{{route('regist')}}">註冊</a> --}}
         <a href="{{route('log')}}">登入</a>
     @else
         <a href="{{ route('logout') }}">登出</a>

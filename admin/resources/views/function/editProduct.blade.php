@@ -23,14 +23,12 @@
 <body style="max-width: 1200px;display: flex;justify-content: center;">
     <div>
         <div style="margin-bottom: 20px">
-            <label for="id" style="margin-right: 8px ">商品ID：</label>
-            <input type="text"  name="id" id="id" style="width: 100px">
-            <input type="button" style="width: 100px" id="search" value="搜尋">
+            <input type="hidden"  name="id" id="id" style="width: 100px">
         </div>
         
         <form action="{{ route('editproduct') }}" method="post" style="display:flex;justify-content: space-around;flex-wrap: wrap; " enctype="multipart/form-data" required>
             {{ csrf_field() }}
-            <div style="width: 200px;margin-right:50px">
+            <div style="width: 200px;margin-right:300px">
                 <label for="img_input">圖片:</label>
                 <img src="" id="demo" height="200" style="margin-top: 10px">
             </div>
@@ -59,9 +57,6 @@
 
         </form>
         @include('layouts.errors')
-        <div>
-            <a href="{{ route('home') }}">回到首頁</a><br>
-        </div>
     </div>
     
 </body>
@@ -74,62 +69,63 @@
     let quantity = document.getElementById('quantity');
     let project_id = document.getElementById('project_id');
     let listed = document.getElementById('listed');
-    document.getElementById('search').addEventListener(
-        "click", 
-        function() 
-        {
-            let jsn = JSON.stringify({"id":Number(id.value)});
-            xhr = new XMLHttpRequest();
-            xhr.open('post','{{ route('findproduct') }}');
-            xhr.setRequestHeader('X-CSRF-TOKEN', '<?PHP echo csrf_token() ?>');
-            xhr.setRequestHeader("Content-type","application/json; charset=utf-8");
-            xhr.send(jsn);
-            xhr.onload = function() {
-                try {
-                    let result = JSON.parse(this.responseText);
-                    demo.src = result["url"];
-                    name.value = result["name"];
-                    money.value = result["money"];
-                    introduce.value = result["introduce"];
-                    quantity.value = result["quantity"];
-                    project_id.value = result["project_id"];
-                    listed.value = result["listed"];
-                    console.log(result["project_id"]);
-                    console.log(project_id.value);
-                } catch (e) {
-                    window.alert(this.responseText);
-                    id.value = "";
-                }
-            }
-        });
-        document.getElementById('save').addEventListener(
-        "click", 
-        function() 
-        {
-            let jsn = JSON.stringify({"id":id.value, "name":name.value, 'money':money.value, 'introduce':introduce.value, 'quantity':quantity.value, 'project_id':project_id.value, 'listed':listed.value});
-            xhr = new XMLHttpRequest();
-            xhr.open('post','{{ route('editproduct') }}');
-            xhr.setRequestHeader('X-CSRF-TOKEN', '<?PHP echo csrf_token() ?>');
-            xhr.setRequestHeader("Content-type","application/json; charset=utf-8");
-            xhr.send(jsn);
-            xhr.onload = function() {
-                try {
-                    let result = JSON.parse(this.responseText);
-                    demo.src = result["url"];
-                    name.value = result["name"];
-                    money.value = result["money"];
-                    introduce.value = result["introduce"];
-                    quantity.value = result["quantity"];
-                    project_id.value = result["project_id"];
-                    listed.value = result["listed"];
-                    console.log(result["project_id"]);
-                    console.log(project_id.value);
-                } catch (e) {
-                    window.alert(this.responseText);
+    xhr = new XMLHttpRequest();
+    xhr.open('post','{{ route('findproduct') }}');
+    xhr.setRequestHeader('X-CSRF-TOKEN', '<?PHP echo csrf_token() ?>');
+    xhr.setRequestHeader("Content-type","application/json; charset=utf-8");
+    xhr.send();
+    xhr.onload = function() {
+        try {
+            let result = JSON.parse(this.responseText);
+            id.value = result['id'];
+            demo.src = result["url"];
+            name.value = result["name"];
+            money.value = result["money"];
+            introduce.value = result["introduce"];
+            quantity.value = result["quantity"];
+            project_id.value = result["project_id"];
+            listed.value = result["listed"];
+        } catch (e) {
+            window.alert(this.responseText);
+            id.value = "";
+        }
+    }
+    // document.getElementById('search').addEventListener(
+    //     "click", 
+    //     function() 
+    //     {
+    //         let jsn = JSON.stringify({"id":Number(id.value)});
+            
+    //     });
 
-                }
+    document.getElementById('save').addEventListener(
+    "click", 
+    function() 
+    {
+        let jsn = JSON.stringify({"id":id.value, "name":name.value, 'money':money.value, 'introduce':introduce.value, 'quantity':quantity.value, 'project_id':project_id.value, 'listed':listed.value});
+        xhr = new XMLHttpRequest();
+        xhr.open('post','{{ route('editproduct') }}');
+        xhr.setRequestHeader('X-CSRF-TOKEN', '<?PHP echo csrf_token() ?>');
+        xhr.setRequestHeader("Content-type","application/json; charset=utf-8");
+        xhr.send(jsn);
+        xhr.onload = function() {
+            try {
+                let result = JSON.parse(this.responseText);
+                demo.src = result["url"];
+                name.value = result["name"];
+                money.value = result["money"];
+                introduce.value = result["introduce"];
+                quantity.value = result["quantity"];
+                project_id.value = result["project_id"];
+                listed.value = result["listed"];
+                console.log(result["project_id"]);
+                console.log(project_id.value);
+            } catch (e) {
+                window.alert(this.responseText);
+
             }
-        });
+        }
+    });
 
 </script>
 </html>
