@@ -47,3 +47,10 @@ Route::post('findmember','MemberController@store')->name('findmember'); //個人
 Route::post('editmember','MemberController@up')->name('editmember'); //更改內容
 Route::post('editmemberpassword','MemberController@editPassword')->name('editpsw'); //更改密碼
 //訂單操作
+Route::get('order','OrderController@index')->name('order');//跳轉到列表頁面
+Route::post('orderall', 'OrderController@all')->name('allo');//訂單列表
+Route::post('ordersetid', 'OrderController@setid')->name('setpid');//建立session
+Route::post('ordersearch', 'OrderController@search')->name('searcho');//訂單搜尋
+Route::post('orderback', 'OrderController@back')->name('back');//建立退貨單
+//退貨操作
+Route::get('backindex','OrderController@backindex')->name('backindex');//跳轉退貨列表

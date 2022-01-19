@@ -21,6 +21,7 @@
     <link href="http://v3.bootcss.com/examples/signin/signin.css" rel="stylesheet">
 </head>
 <body style="display: flex;justify-content: center;">
+    
     <div>
         <form action="{{ route('search') }}" method="post" style="display:flex;justify-content: space-around;flex-wrap: wrap;width:200px " enctype="multipart/form-data" required>
             {{ csrf_field() }}
@@ -28,8 +29,8 @@
             <input type="text" id="name" name="name" class="form-control" required>
             <label for="lv" style="margin: 5px auto">帳號等級</label>
             <select name="lv" id="lv" disabled='true' class="form-control" required style="margin: 5px auto">
-                <option value="1">新註冊</option>
-                <option value="2">一般</option>
+                <option value="1">等級一</option>
+                <option value="2">等級二</option>
             </select>
             <label for="address" style="margin: 5px auto" >帳號住址</label>
             <textarea class="form-control" name="address" id="address" cols="20" rows="10" maxlength="50" ></textarea>
@@ -42,6 +43,7 @@
         </form>
         @include('layouts.errors')
         <a href="/" style="text-align: center;display: block;margin-bottom:-5px;" >回到首頁</a><br>
+        <a href="javascript:history.back(-1)"> 上一頁 </a>
     </div>
     <div class="pswshow" id="pswshow" style="position: fixed;width:100%;height:150%;justify-content: center; margin-top:-20px;display:none">
         <form action="" method="post" style="display:flex;justify-content: space-around;flex-wrap: wrap;width:200px;align-content: center;margin-top:-300px;" enctype="multipart/form-data" required>
@@ -54,6 +56,7 @@
         </form>
         <div style="opacity: 0.85;position: absolute;width:100%;height:100%;margin-top:-20px;background-color:black;z-index:-1">
         </div>
+        
     </div>
 </body>
 <script>

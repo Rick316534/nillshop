@@ -23,6 +23,7 @@ class CreateMembersTable extends Migration
             $table->timestamps();
             $table->string('lv');
             $table->string('money');
+            $table->string('sum');
             $table->boolean('status');
             $table->rememberToken();
         });

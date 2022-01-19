@@ -16,7 +16,7 @@ class Car extends Authenticatable
      */
     public $timestamps = false;
     protected $fillable = [
-         'id', 'Pid', 
+         'id', 'Pid', 'much' 
     ];
     
     /**
@@ -27,4 +27,9 @@ class Car extends Authenticatable
     protected $hidden = [
         
     ];
+    
+    public function product()
+    {
+        return $this->hasOne('App\Product', 'id', 'Pid');
+    }
 }

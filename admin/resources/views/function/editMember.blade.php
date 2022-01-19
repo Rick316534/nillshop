@@ -31,15 +31,17 @@
             <input type="text" id="name" name="name" class="form-control" required>
             <label for="lv" style="margin: 5px auto">帳號等級</label>
             <select name="lv" id="lv" disabled='true' class="form-control" required style="margin: 5px auto">
-                <option value="1">新註冊</option>
-                <option value="2">一般</option>
+                <option value="1">等級一</option>
+                <option value="2">等級二</option>
             </select>
             <label for="address" style="margin: 5px auto" >帳號住址</label>
             <textarea class="form-control" name="address" id="address" cols="20" rows="10" maxlength="50" ></textarea>
             <label for="phone" style="margin: 5px auto">帳號電話</label>
             <input  class="form-control" type="text" id="phone" name="phone" required>
             <label for="money" style="margin: 5px auto">帳號餘額</label>
-            <input class="form-control" type="text" id="money" name="money" required>    
+            <input class="form-control" type="text" id="money" name="money" required> 
+            <label for="sum" style="margin: 5px auto" >帳號消費金額</label>
+            <input class="form-control" type="text" id="sum" name="sum" disabled='true' required>    
             <label for="status" style="margin: 5px auto">帳號狀態</label>
             <select name="status" id="status" class="form-control" required style="margin: 5px auto">
                 <option value="1">啟用</option>
@@ -70,6 +72,7 @@
     let status = document.getElementById('status');
     let address = document.getElementById('address');
     let phone = document.getElementById('phone');
+    let sum = document.getElementById('sum');
 
     xhr = new XMLHttpRequest();
     xhr.open('post','{{ route('findmember') }}');
@@ -86,6 +89,7 @@
             status.value = result['status'];
             phone.value = result['phone'];
             address.value = result['address'];
+            sum.value = result['sum'];
             document.getElementById('psw').style.display = "block" ;
             console.log(result);
         } catch (e) {
@@ -117,7 +121,9 @@
                 } catch (e) {
                     window.alert(this.responseText);
                 }
+                window.close();
             }
+            
         }
     );
 

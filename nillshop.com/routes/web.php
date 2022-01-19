@@ -36,5 +36,21 @@ Route::post('membernewpsw', 'MemberController@editPassword')->name('newpsw');
 Route::get('show/{id?}', 'ProductController@show')->name('show');
 Route::post('productstore', 'ProductController@store')->name('productstore');
 Route::post('Pnamesearch', 'ProductController@search')->name('Pnamesearch');//首頁搜尋功能
-Route::post('carset', 'ProductController@carset')->name('carset');//購物車
+Route::post('Pidsearch', 'ProductController@idsearch')->name('Pidsearch');//首頁分類功能
+
 //Route::post('showintroduce/{id}','ProductController@show')->name('show');
+//購物車
+Route::get('carshow','CarController@index' )->name('car');//進入購物車
+Route::post('carset', 'CarController@carset')->name('carset');//加入購物車
+Route::post('cardel', 'CarController@delete')->name('cardel');//購物車刪除商品
+Route::post('carpay', 'CarController@pay')->name('carpay');//紀錄單一購物商品
+//結帳
+Route::get('payshow', 'PayController@index')->name('payshow');//結帳畫面
+Route::get('directpay', 'PayController@directpay')->name('pay');//直接結帳
+//訂單
+Route::post('orderset', 'OrderController@set')->name('send');//建立訂單
+Route::post('orderall', 'OrderController@all')->name('allo');//訂單列表
+Route::post('ordersetid', 'OrderController@setid')->name('setpid');//建立session
+Route::post('ordersearch', 'OrderController@search')->name('searcho');//訂單搜尋
+Route::post('orderback', 'OrderController@back')->name('back');//建立退貨單
+//退貨

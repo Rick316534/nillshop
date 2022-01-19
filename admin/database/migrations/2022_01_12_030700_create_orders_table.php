@@ -20,6 +20,12 @@ class CreateOrdersTable extends Migration
             $table->string('user_id');
             $table->string('status');
             $table->string('money');
+            $table->string('sum');
+            $table->string('name');
+            $table->string('address');
+            $table->string('phone');
+            $table->string('listed');
+            
         });
     }
 

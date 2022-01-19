@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Member;
-
+use App\Order;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Hash;
+
 
 class MemberController extends Controller
 {
@@ -23,11 +24,13 @@ class MemberController extends Controller
         switch ($request['rout']) 
         {
             case "o" :
-                return "a";
+                $datas = Order::where('user_id', Auth::id())->get();
+                return view('list.Ordershow', compact('datas'));
                 break;
 
             case "r" :
-                return "a";
+                $datas = Order::where('user_id', Auth::id())->where('status', '退貨')->get();
+                return view('list.backshow', compact('datas'));
                 break;
 
             case "e" :

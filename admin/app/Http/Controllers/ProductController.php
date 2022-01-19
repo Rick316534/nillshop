@@ -91,14 +91,14 @@ class ProductController extends Controller
     {
         try {
             $result = Product::where('id', session()->get('id'))->first();
-            $url = $result['url'];
-            $name = $result['name'];
-            $quantity = $result['quantity'];
-            $money = $result['money'];
-            $listed = $result['listed'];
-            $project_id = $result['project_id'];
-            $introduce = $result['introduce'];
-            $DB = json_encode(array('url'=>$url, 'name'=>$name, 'quantity'=>$quantity, 'money'=>$money, 'listed'=>$listed, 'project_id'=>$project_id, 'introduce'=>$introduce));
+            // $url = $result['url'];
+            // $name = $result['name'];
+            // $quantity = $result['quantity'];
+            // $money = $result['money'];
+            // $listed = $result['listed'];
+            // $project_id = $result['project_id'];
+            // $introduce = $result['introduce'];
+            // $DB = json_encode(array('url'=>$url, 'name'=>$name, 'quantity'=>$quantity, 'money'=>$money, 'listed'=>$listed, 'project_id'=>$project_id, 'introduce'=>$introduce));
             return $result;
         } catch (\Exception $e) {
             return "查無此ID";

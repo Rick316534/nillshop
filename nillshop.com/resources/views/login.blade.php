@@ -49,6 +49,7 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit" style="border-radius: 20px;">登陸</button>
         <a href="{{route('regist')}}" class="btn btn-lg btn-primary btn-block" type="submit" style="border-radius: 20px;">去註冊>></a> 
         <button class="btn btn-lg btn-primary btn-block " type="button" onclick="history.back()" style="border-radius: 20px;">取消</button>
+        <h2 class="form-signin-heading">客訴電話：0911987487</h2>
     </form>
 
 </div> <!-- /container -->

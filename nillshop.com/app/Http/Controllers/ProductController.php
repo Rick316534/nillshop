@@ -66,23 +66,15 @@ class ProductController extends Controller
             return "找不到沒有ID的商品" ;
         }
     }
-    
-    //新增購物車
-    public function carset(Request $request)
+    public function idsearch(Request $request)
     {
-        // session()->pull('carid', $request['id']);
-        // session()->push('carid', $request['id']);
-        // return Session()->all();
-        try {
-            Car::create(([
-                'id' => Auth::id(),
-                'Pid' => $request['pid'],
-            ]));
-            return "以加入購物車";
-        } catch (\Exception $e) {
-            return $request['pid'];
-        }
-        
-        
+
+        $datas = Product::where('project_id', $request['id'])
+                    ->where('listed', '1')
+                    ->orderBy('money','desc')
+                    ->get();
+
+        return $datas ;
     }
+   
 }

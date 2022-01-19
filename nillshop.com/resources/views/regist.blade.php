@@ -47,6 +47,8 @@
         <button class="btn btn-lg btn-primary " type="submit" style="border-radius: 20px;">註冊</button>
         <button class="btn btn-lg btn-primary " type="reset" style="border-radius: 20px;">重製輸入</button>
         <button class="btn btn-lg btn-primary " type="button" onclick="history.back()" style="border-radius: 20px;">取消</button>
+        <h2 class="form-signin-heading">客訴電話：0911987487</h2>
+
     </form>
 
 </div>

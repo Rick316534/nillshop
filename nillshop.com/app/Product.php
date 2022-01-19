@@ -29,4 +29,5 @@ class Product extends Authenticatable
     protected $hidden = [
         
     ];
+    
 }

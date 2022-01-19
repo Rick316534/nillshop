@@ -90,13 +90,6 @@
             id.value = "";
         }
     }
-    // document.getElementById('search').addEventListener(
-    //     "click", 
-    //     function() 
-    //     {
-    //         let jsn = JSON.stringify({"id":Number(id.value)});
-            
-    //     });
 
     document.getElementById('save').addEventListener(
     "click", 
@@ -118,12 +111,11 @@
                 quantity.value = result["quantity"];
                 project_id.value = result["project_id"];
                 listed.value = result["listed"];
-                console.log(result["project_id"]);
-                console.log(project_id.value);
             } catch (e) {
                 window.alert(this.responseText);
 
             }
+            window.close();
         }
     });
 

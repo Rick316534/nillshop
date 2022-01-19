@@ -2,9 +2,36 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
-class Order extends Model
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class Order extends Authenticatable
 {
-    //
+
+    use Notifiable;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        "content", "user_id", "status", "money", "name", "phone", "address", "listed", "sum",
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+    
+    ];
+
+    public function member()
+    {
+        return $this->hasOne('App\Member', 'id', 'user_id');
+    }
+    
 }

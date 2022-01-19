@@ -12,9 +12,20 @@
         <a href="{{route('log')}}">登入</a>
     @else
         <a href="{{ route('logout') }}">登出</a>
-        <a href="{{ route('product',['rout' => 'a']) }}">新增商品</a>
-        <a href="{{ route('product',['rout' => 'e']) }}">編輯商品</a>
-        <a href="{{ route('member') }}">帳號列表</a>
+        <div>
+            <h2>商品管理</h2>
+            <a href="{{ route('product',['rout' => 'a']) }}">新增商品</a>
+            <a href="{{ route('product',['rout' => 'e']) }}">編輯商品</a>
+        </div>
+        <div>
+            <h2>帳號功能</h2>
+            <a href="{{ route('member') }}">帳號列表</a>
+        </div>
+        <div>
+            <h2>訂單與退貨</h2>
+            <a href="{{ route('order') }}">訂單管理</a>
+            <a href="{{ route('backindex') }}">退貨管理</a>
+        </div>
     @endguest
     
 </body>

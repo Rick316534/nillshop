@@ -52,7 +52,8 @@ class MemberController extends Controller
             $address = $result['address'];
             $phone = $result['phone'];
             $status = $result['status'];
-            $DB = json_encode(array('lv'=>$lv, 'name'=>$name, 'phone'=>$phone, 'money'=>$money, 'status'=>$status, 'address'=>$address, 'email'=>$email));
+            $sum = $result['sum'];
+            $DB = json_encode(array('lv'=>$lv, 'name'=>$name, 'phone'=>$phone, 'money'=>$money, 'status'=>$status, 'address'=>$address, 'email'=>$email, 'sum'=>$sum));
             return $DB;
         } catch (\Exception $e) {
             return "錯誤";

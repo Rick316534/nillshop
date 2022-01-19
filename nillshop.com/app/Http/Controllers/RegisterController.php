@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Member;
 
+use App\Product;
+
 use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
@@ -35,8 +37,10 @@ class RegisterController extends Controller
             'lv' => '1',
             'money' => 0,
             'status' => true,
+            'sum' =>0,
         ]));
-        return view('login');
+        $datas = Product::where('listed', '1')->get();
+        return view('home', compact('datas'));
     }
     
     

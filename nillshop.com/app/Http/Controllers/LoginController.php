@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use App\Member;
+use App\Product;
+
 
 class LoginController extends Controller
 {
+    
     public function index()
     {
         //渲染註冊頁面
@@ -31,7 +34,9 @@ class LoginController extends Controller
 
             $status = Member::where('email',$request['email'])->first();
             if ($status['status']) {
-                return view('home') ;//渲染註冊頁面
+                //渲染註冊頁面
+                $datas = Product::where('listed', '1')->get();
+                return view('home', compact('datas'));
             } else {
                 return view('login'). "<script>window.alert('帳號停用');</script>";//渲染註冊頁面
             }
@@ -46,6 +51,9 @@ class LoginController extends Controller
     public function logout()
     {
         Auth::logout();
-        return view('home');//渲染註冊頁面
+        //渲染註冊頁面
+        $datas = Product::where('listed', '1')->get();
+        return view('home', compact('datas'));
+
     }
 }
